@@ -12,16 +12,18 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		echo "       creating cache: $CACHE_DIR"
 		mkdir -p $CACHE_DIR
 		TMP_DIR=`mktemp -d $CACHE_DIR/subdirXXXXX`
+		TMP_MONOREPO_DIR=`mktemp -d $CACHE_DIR/monorepoXXXXX`
 		echo "       created tmp dir: $TMP_DIR"
 		echo "       moving working dir: $PROJECT_PATH to $TMP_DIR"
 		cp -R $BUILD_DIR/$PROJECT_PATH/. $TMP_DIR/
 	 	echo "       cleaning build dir $BUILD_DIR"
 	 	rm -rf $BUILD_DIR/$PROJECT_PATH
 		echo "       recreating $BUILD_DIR"
-		mkdir -p $BUILD_DIR/monorepo
-		mv -f $BUILD_DIR/* $BUILD_DIR/monorepo/
+		mv -f $BUILD_DIR/* $TMP_MONOREPO_DIR
 		echo "       copying preserved work dir from cache $TMP_DIR to build dir $BUILD_DIR"
 		cp -R $TMP_DIR/. $BUILD_DIR/
+		mkdir -p $BUILD_DIR/monorepo
+		cp -R $TMP_MONOREPO_DIR/. $BUILD_DIR/monorepo
 		echo "       cleaning tmp dir $TMP_DIR"
 		echo "monorepo" > $BUILD_DIR/.monorepo_root
 		rm -rf $TMP_DIR
