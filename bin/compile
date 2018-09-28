@@ -21,11 +21,13 @@ TMP_MONOREPO_DIR=`mktemp -d $CACHE_DIR/monorepoXXXXX`
 echo "       created tmp dir: $TMP_MONOREPO_DIR"
 
 echo "       moving working dir: $PROJECT_PATH/* to $TMP_DIR"
-mv -f $BUILD_DIR/$PROJECT_PATH/* $TMP_DIR/
+mv -f $BUILD_DIR$PROJECT_PATH/* $TMP_DIR/
 
-echo "ls 1"
+echo "-------> ls TMP_DIR"
 ls $TMP_DIR
+echo "-------> ls BUILD_DIR/PROJECT_PATH"
 ls $BUILD_DIR/$PROJECT_PATH
+echo "-------> ls BUILD_DIR"
 ls $BUILD_DIR
 
 
@@ -34,10 +36,11 @@ rm -rf $BUILD_DIR/$PROJECT_PATH
 
 mv -f $BUILD_DIR/* $TMP_MONOREPO_DIR
 
-echo "ls 2"
+echo "-------> ls TMP_DIR"
 ls $TMP_DIR
+echo "-------> ls TMP_MONOREPO_DIR"
 ls $TMP_MONOREPO_DIR
-ls $BUILD_DIR/$PROJECT_PATH
+echo "-------> ls BUILD_DIR"
 ls $BUILD_DIR
 
 mv -f $TMP_DIR/* $BUILD_DIR
@@ -45,6 +48,17 @@ mkdir -p $BUILD_DIR/monorepo
 mv -f $TMP_MONOREPO_DIR/* $BUILD_DIR/monorepo
 
 echo "monorepo" > $BUILD_DIR/.monorepo_root
+
+echo "-------> ls TMP_DIR"
+ls $TMP_DIR
+echo "-------> ls TMP_MONOREPO_DIR"
+ls $TMP_MONOREPO_DIR
+echo "-------> ls BUILD_DIR/PROJECT_PATH"
+ls $BUILD_DIR/$PROJECT_PATH
+echo "-------> ls BUILD_DIR"
+ls $BUILD_DIR
+echo "-------> cat .monorepo_root"
+cat $BUILD_DIR/.monorepo_root
 
 rm -rf $TMP_DIR
 rm -rf $TMP_MONOREPO_DIR
