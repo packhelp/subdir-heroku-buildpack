@@ -54,11 +54,11 @@ ls $TMP_DIR
 echo "-------> ls TMP_MONOREPO_DIR"
 ls $TMP_MONOREPO_DIR
 echo "-------> ls BUILD_DIR/PROJECT_PATH"
-ls $BUILD_DIR/$PROJECT_PATH
-echo "-------> ls BUILD_DIR"
 ls $BUILD_DIR
 echo "-------> cat .monorepo_root"
 cat $BUILD_DIR/.monorepo_root
+echo "-------> ls BUILD_DIR/monorepo"
+ls $BUILD_DIR/monorepo
 
 rm -rf $TMP_DIR
 rm -rf $TMP_MONOREPO_DIR
